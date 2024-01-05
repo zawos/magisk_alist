@@ -21,13 +21,13 @@ restore_alist() {
 		then
 			cp /data/adb/Alist_online_backups/alist $MODDIR/
 			else
-			echo "未发现备份的alist二进制文件，跳过此项" >> /data/adb/Alist_online_backups/backup.log
+			echo "$(date +%y-%m-%d-%T)未发现备份的alist二进制文件，跳过此项" >> /data/adb/Alist_online_backups/backup.log
 			continue
 			fi
 	chmod -R 777 $MODDIR/data/
-	echo "恢复数据成功" >> /data/adb/Alist_online_backups/backup.log
+	echo "$(date +%y-%m-%d-%T)恢复数据成功" >> /data/adb/Alist_online_backups/backup.log
 	else
-	echo "第一次安装，跳过恢复数据"  >> /data/adb/Alist_online_backups/backup.log
+	echo "$(date +%y-%m-%d-%T)第一次安装，跳过恢复数据"  >> /data/adb/Alist_online_backups/backup.log
 	fi
 }
 
