@@ -13,4 +13,6 @@ A Magisk module for alist , with automatic update alist version
 
 数据备份目录:/data/adb/Alist_online_backups/.卸载模块后(禁用不会)会清除备份目录
 
+若安装失败,请用任意终端执行sudo magisk --install-module /sdcard/Download/xxxx.zip
+
 [alist项目地址alist-org/alist](https://github.com/alist-org/alist)
