@@ -85,7 +85,7 @@ find_arch
 echo "$(date +%y-%m-%d-%T) 本机架构${ARCH}" >> download.log
 
 #获取最新版本号
-	url=$(timeout 50s curl -OL https://mirrors.tuna.tsinghua.edu.cn/termux/apt/termux-main/dists/stable/main/binary-${ARCH}/Packages && grep pool Packages |grep alist |awk '{print $2}')
+  url=$(timeout 50s curl -OL https://mirrors.tuna.tsinghua.edu.cn/termux/apt/termux-main/dists/stable/main/binary-${ARCH}/Packages && grep pool Packages |grep alist |awk '{print $2}')
 	new_ver=$(grep -A 6 -i 'Package: alist' Packages|grep -iw "^version"|tr -d -c '[0-9] .')
 	echo "最新版本为$new_ver" >> download.log 2>&1
 	
