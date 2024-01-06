@@ -1,6 +1,0 @@
-id=Alist_online
-name=Alist_online
-version=v3.29.1
-versionCode=3291
-author=lxsy [auto version]
-description=支持32/64位的arm设备,自动检查更新,网络连接成功才会启动alist,用户名/密码admin,更新频率:1.启动时和1次/天 更新源:清华源	备份频率:1.启动后的5分钟和60分钟时2.后续1次/天，数据备份目录:/data/adb/Alist_online_backups/.卸载模块后(禁用不会)会清除备份目录
