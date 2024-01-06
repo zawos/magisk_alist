@@ -1,3 +1,4 @@
+#!/system/bin/sh
 MODDIR=${0%/*}
 #MODDIR=/data/adb/modules/Alist_online
 cd $MODDIR/
@@ -92,33 +93,32 @@ echo "$(date +%y-%m-%d-%T) 本机架构${ARCH}" >> download.log
 	#本模块会备份恢复上次运行alist的版本,所以模块自带的alist版本不会影响后续检测升级,使用的是上次升级后的版本
 	echo "当前版本为$cur_ver" >> download.log 2>&1
   # 比较版本号
-  if [[ "$cur_ver" == "$new_ver" ]]; then
+  if [ "$cur_ver" = "$new_ver" ]; then
       echo "版本相同，无需升级。" >> download.log
-  elif [[ "$(echo -e "$cur_ver\n$new_ver" | sort -V | tail -n 1)" == "$new_ver" ]]; then
-    echo "需要升级。" >> download.log
-    # 更新操作开始
-    mkdir -p tmp/tmp_deb/alist/
-    timeout 360s curl -L https://mirrors.tuna.tsinghua.edu.cn/termux/apt/termux-main/${url} -o tmp/tmp_deb/alist_latest.deb
-    chmod 755 dpkg
-    echo "现在开始解压deb" >> download.log
-    $MODDIR/dpkg -x $MODDIR/tmp/tmp_deb/alist_latest.deb $MODDIR/tmp/tmp_deb/alist/
-    echo "$? 如果输出是0那么解压deb成功" >> download.log
-    # 将最新版本复制到工作目录
-    echo "现在开始更新" >> download.log
-    if [ -f tmp/tmp_deb/alist/data/data/com.termux/files/usr/bin/alist ]
-    then
-    stop_alist
-    echo "在更新文件前，检查alist是否还在运行" >> download.log
-    check_alist
-    sleep 3s
-    cp tmp/tmp_deb/alist/data/data/com.termux/files/usr/bin/alist $MODDIR/
-    rm -rf tmp/tmp_deb/*;
-    rm -f Packages;
-      start_alist
-      echo "$(date +%y-%m-%d-%T) 更新成功,正在重启alist" >> download.log
-    else
-      echo "文件下载失败，请重启设备再试" >> download.log
-    fi
+  elif [ "$(echo -e "$cur_ver\n$new_ver" | sort -V | tail -n 1)" = "$new_ver" ]; then
+      echo "需要升级。" >> download.log
+      # 更新操作开始
+      mkdir -p tmp/tmp_deb/alist/
+      timeout 360s curl -L https://mirrors.tuna.tsinghua.edu.cn/termux/apt/termux-main/${url} -o tmp/tmp_deb/alist_latest.deb
+      chmod 755 dpkg
+      echo "现在开始解压deb" >> download.log
+      $MODDIR/dpkg -x $MODDIR/tmp/tmp_deb/alist_latest.deb $MODDIR/tmp/tmp_deb/alist/
+      echo "$? 如果输出是0那么解压deb成功" >> download.log
+      # 将最新版本复制到工作目录
+      echo "现在开始更新" >> download.log
+      if [ -f tmp/tmp_deb/alist/data/data/com.termux/files/usr/bin/alist ]; then
+        stop_alist
+        echo "在更新文件前，检查alist是否还在运行" >> download.log
+        check_alist
+        sleep 3s
+        cp tmp/tmp_deb/alist/data/data/com.termux/files/usr/bin/alist $MODDIR/
+        rm -rf tmp/tmp_deb/*;
+        rm -f Packages;
+          start_alist
+          echo "$(date +%y-%m-%d-%T) 更新成功,正在重启alist" >> download.log
+      else
+          echo "文件下载失败，请重启设备再试" >> download.log
+      fi
     # 更新操作结束
   else
     echo "$(date +%y-%m-%d-%T) 无需更新" >> download.log
