@@ -7,12 +7,10 @@ A Magisk module for alist , with automatic update alist version
 
 用户名/密码admin
 
-更新频率:1.启动时和1次/天 更新源:清华termux源
+更新频率:启动时 and 1次/天; 更新源:清华termux源
 
-备份频率:1.启动后的5分钟和60分钟时2.后续1次/天
+备份频率:启动后的5分钟和60分钟 and 后续1次/天
 
 数据备份目录:/data/adb/Alist_online_backups/.卸载模块后(禁用不会)会清除备份目录
-
-若安装失败,请用任意终端执行sudo magisk --install-module /sdcard/Download/xxxx.zip
 
 [alist项目地址alist-org/alist](https://github.com/alist-org/alist)
