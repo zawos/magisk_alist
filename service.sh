@@ -30,6 +30,7 @@ restore_alist() {
 	echo "$(date +%y-%m-%d-%T)恢复数据成功" >> /data/adb/Alist_online_backups/backup.log
 	else
 	echo "$(date +%y-%m-%d-%T)第一次安装，跳过恢复数据"  >> /data/adb/Alist_online_backups/backup.log
+	$MODDIR/alist admin set admin
 	fi
 }
 
